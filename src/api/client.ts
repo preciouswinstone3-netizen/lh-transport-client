@@ -1,7 +1,17 @@
 import axios, { AxiosError } from 'axios';
 
+// In local dev, requests to /api are proxied to the local server (see
+// vite.config.ts), so no env var is needed.
+//
+// On Vercel, the client and server are two separate deployments on two
+// separate domains, so relative '/api' calls would hit the client's own
+// domain and 404. Set VITE_API_URL (see .env.production) to the deployed
+// server's origin, e.g. https://lh-transport-server.vercel.app - the code
+// below then calls `${VITE_API_URL}/api/...` instead.
+const apiOrigin = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
 export const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${apiOrigin}/api`,
   timeout: 20000,
 });
 
@@ -41,5 +51,5 @@ api.interceptors.response.use(
 );
 
 export function invoicePdfUrl(id: string): string {
-  return `/api/invoices/${id}/pdf`;
+  return `${apiOrigin}/api/invoices/${id}/pdf`;
 }
