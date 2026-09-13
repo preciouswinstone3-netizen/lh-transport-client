@@ -2,9 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import {
   FileText,
-  Wallet,
-  AlertCircle,
-  TrendingUp,
   Plus,
   Users,
   BarChart3,
@@ -12,7 +9,6 @@ import {
   Clock,
 } from 'lucide-react';
 import { fetchDashboard } from '../api/misc';
-import { StatCard } from '../components/dashboard/StatCard';
 import { RevenueTrendChart, InvoiceVolumeChart, StatusBreakdownChart } from '../components/dashboard/Charts';
 import { Card, CardHeader, StatusBadge, EmptyState, Skeleton } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -29,21 +25,6 @@ export default function DashboardPage() {
         <QuickAction to="/customers" icon={Users} label="Customers" />
         <QuickAction to="/invoices" icon={FileText} label="Invoices" />
         <QuickAction to="/reports" icon={BarChart3} label="Reports" />
-      </div>
-
-      {/* Stats grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <StatCard label="Total Invoiced" value={formatMoney(data?.stats.totalInvoiced)} icon={TrendingUp} tone="primary" loading={isLoading} />
-        <StatCard label="Amount Paid" value={formatMoney(data?.stats.totalPaidAmount)} icon={Wallet} tone="success" loading={isLoading} />
-        <StatCard label="Outstanding" value={formatMoney(data?.stats.outstanding)} icon={AlertCircle} tone="warning" loading={isLoading} />
-        <StatCard label="Total Invoices" value={String(data?.stats.totalInvoices ?? 0)} icon={FileText} loading={isLoading} hint={`${data?.stats.invoicesThisMonth ?? 0} this month`} />
-      </div>
-
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-        <MiniStat label="Paid" value={data?.stats.paid} tone="success" loading={isLoading} />
-        <MiniStat label="Unpaid" value={data?.stats.unpaid} tone="default" loading={isLoading} />
-        <MiniStat label="Partially Paid" value={data?.stats.partiallyPaid} tone="warning" loading={isLoading} />
-        <MiniStat label="Overdue" value={data?.stats.overdue} tone="danger" loading={isLoading} />
       </div>
 
       {/* Charts */}
@@ -177,28 +158,3 @@ function QuickAction({
   );
 }
 
-function MiniStat({
-  label,
-  value,
-  tone,
-  loading,
-}: {
-  label: string;
-  value?: number;
-  tone: 'default' | 'success' | 'warning' | 'danger';
-  loading?: boolean;
-}) {
-  const dotClass = {
-    default: 'bg-slate-400',
-    success: 'bg-emerald-500',
-    warning: 'bg-amber-500',
-    danger: 'bg-red-500',
-  }[tone];
-  return (
-    <div className="bg-white rounded-xl border border-slate-100 shadow-card px-4 py-3 flex items-center gap-2.5">
-      <span className={`h-2 w-2 rounded-full shrink-0 ${dotClass}`} />
-      <span className="text-xs text-slate-500 font-medium truncate">{label}</span>
-      {loading ? <Skeleton className="h-4 w-8 ml-auto" /> : <span className="ml-auto text-sm font-bold text-brand-navy">{value ?? 0}</span>}
-    </div>
-  );
-}

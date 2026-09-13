@@ -6,6 +6,8 @@ import { ProtectedRoute, AdminRoute } from './components/ProtectedRoute';
 import { AppLayout } from './components/layout/AppLayout';
 
 import LoginPage from './pages/Login';
+import ForgotPasswordPage from './pages/ForgotPassword';
+import ResetPasswordPage from './pages/ResetPassword';
 import DashboardPage from './pages/Dashboard';
 import InvoicesPage from './pages/Invoices';
 import InvoiceFormPage from './pages/InvoiceForm';
@@ -13,6 +15,7 @@ import InvoiceViewPage from './pages/InvoiceView';
 import CustomersPage from './pages/Customers';
 import CustomerViewPage from './pages/CustomerView';
 import ReportsPage from './pages/Reports';
+import ProfilePage from './pages/Profile';
 import SettingsPage from './pages/Settings';
 import AdministratorsPage from './pages/Administrators';
 import AuditLogPage from './pages/AuditLog';
@@ -41,6 +44,8 @@ export default function App() {
         />
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
 
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
@@ -52,6 +57,7 @@ export default function App() {
               <Route path="/customers" element={<CustomersPage />} />
               <Route path="/customers/:id" element={<CustomerViewPage />} />
               <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
 
               <Route element={<AdminRoute />}>
                 <Route path="/settings" element={<SettingsPage />} />

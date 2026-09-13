@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { SettingsIcon, ShieldCheck, UserCog, LogOut, X } from 'lucide-react';
+import { SettingsIcon, ShieldCheck, UserCog, LogOut, X, User } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { logout as apiLogout } from '../../api/auth';
 
@@ -35,6 +35,7 @@ export function MoreMenuSheet({ open, onClose }: { open: boolean; onClose: () =>
           </button>
         </div>
         <div className="p-2">
+          <MenuButton icon={User} label="Profile" onClick={() => go('/profile')} />
           {user?.role === 'admin' && (
             <>
               <MenuButton icon={SettingsIcon} label="Settings" onClick={() => go('/settings')} />

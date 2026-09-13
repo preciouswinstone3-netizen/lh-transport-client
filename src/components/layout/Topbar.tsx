@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Plus, LogOut, Menu, ChevronDown } from 'lucide-react';
+import { Plus, LogOut, Menu, ChevronDown, User } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { logout as apiLogout } from '../../api/auth';
 import { Button } from '../ui/Button';
@@ -66,6 +66,16 @@ export function Topbar({ title, onMenuClick }: { title: string; onMenuClick?: ()
                     <p className="text-sm font-semibold text-brand-navy truncate">{user?.name}</p>
                     <p className="text-xs text-slate-400 truncate">{user?.email}</p>
                   </div>
+                  <button
+                    onClick={() => {
+                      setMenuOpen(false);
+                      navigate('/profile');
+                    }}
+                    className="w-full flex items-center gap-2 px-3.5 py-2 text-sm text-brand-navy hover:bg-slate-50"
+                  >
+                    <User className="h-4 w-4" />
+                    Profile
+                  </button>
                   <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-2 px-3.5 py-2 text-sm text-red-600 hover:bg-red-50"

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Truck, Lock, Mail, Loader2 } from 'lucide-react';
 import { login } from '../api/auth';
 import { useAuthStore } from '../store/authStore';
@@ -84,7 +84,15 @@ export default function LoginPage() {
               </div>
             </FormField>
 
-            <FormField label="Password" required>
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-xs font-semibold text-slate-600">
+                  Password<span className="text-red-500 ml-0.5">*</span>
+                </span>
+                <Link to="/forgot-password" className="text-xs font-semibold text-brand-primary hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                 <Input
@@ -96,7 +104,7 @@ export default function LoginPage() {
                   className="pl-9"
                 />
               </div>
-            </FormField>
+            </div>
 
             {error && (
               <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">

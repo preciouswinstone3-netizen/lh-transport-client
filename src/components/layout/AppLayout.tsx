@@ -14,6 +14,7 @@ const TITLE_MAP: { test: RegExp; title: string }[] = [
   { test: /^\/customers\/[^/]+/, title: 'Customer Profile' },
   { test: /^\/customers/, title: 'Customers' },
   { test: /^\/reports/, title: 'Reports' },
+  { test: /^\/profile/, title: 'My Profile' },
   { test: /^\/settings/, title: 'Company Settings' },
   { test: /^\/administrators/, title: 'Administrators' },
   { test: /^\/audit-log/, title: 'Audit Log' },
